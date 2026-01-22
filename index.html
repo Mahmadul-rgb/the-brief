@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Brief | Clear stories for a digital world</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Inter for that clean tech look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons (Script to render them) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        navy: {
+                            900: '#0f172a', // Deep slate navy
+                            800: '#1e293b',
+                        },
+                        highlight: {
+                            blue: '#2563eb', // Standard tech blue
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Utilities */
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Mobile Menu Transitions */
+        #mobile-menu {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Typography tweaks for readability */
+        .prose p {
+            margin-bottom: 1.5em;
+            line-height: 1.75;
+            color: #334155;
+            /* slate-700 */
+        }
+    </style>
+</head>
+
+<body class="bg-white text-navy-900 overflow-x-hidden">
+
+    <!-- ================= MOBILE MENU OVERLAY ================= -->
+    <div id="mobile-menu" class="fixed inset-0 z-50 bg-white transform translate-x-full flex flex-col h-full w-full">
+        <div class="p-6 flex-grow flex flex-col">
+            <div class="flex justify-between items-center mb-12">
+                <span class="text-xl font-extrabold tracking-tighter">The Brief.</span>
+                <button onclick="toggleMenu()" class="p-2 bg-slate-100 rounded-full hover:bg-slate-200 transition">
+                    <i data-lucide="x" class="w-6 h-6 text-navy-900"></i>
+                </button>
+            </div>
+
+            <nav class="flex flex-col space-y-6">
+                <a href="#" onclick="renderHome(); toggleMenu()" class="text-3xl font-bold text-navy-900">Home</a>
+                <a href="#" class="text-2xl font-medium text-slate-500 hover:text-navy-900 flex items-center gap-3">
+                    <i data-lucide="cpu" class="w-6 h-6"></i> Technology
+                </a>
+                <a href="#" class="text-2xl font-medium text-slate-500 hover:text-navy-900 flex items-center gap-3">
+                    <i data-lucide="smartphone" class="w-6 h-6"></i> Artificial Intelligence
+                </a>
+                <a href="#" class="text-2xl font-medium text-slate-500 hover:text-navy-900 flex items-center gap-3">
+                    <i data-lucide="wifi" class="w-6 h-6"></i> Digital Life
+                </a>
+                <a href="#" class="text-2xl font-medium text-slate-500 hover:text-navy-900 flex items-center gap-3">
+                    <i data-lucide="globe" class="w-6 h-6"></i> Global Good
+                </a>
+            </nav>
+
+            <div class="mt-auto border-t border-slate-100 pt-6">
+                <button class="w-full py-4 bg-navy-900 text-white rounded-lg font-bold text-lg mb-4">Subscribe to
+                    Newsletter</button>
+                <p class="text-slate-400 text-sm">© 2026 The Brief Media</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= HEADER ================= -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-slate-100">
+        <div class="container mx-auto px-4 h-16 flex items-center justify-between">
+            <!-- Logo -->
+            <div onclick="renderHome()" class="cursor-pointer group">
+                <h1
+                    class="text-2xl font-extrabold tracking-tighter leading-none group-hover:text-highlight-blue transition-colors">
+                    The Brief</h1>
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest hidden sm:block">Clear
+                    stories for a digital world</span>
+            </div>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#" class="text-sm font-semibold text-slate-600 hover:text-navy-900">Technology</a>
+                <a href="#" class="text-sm font-semibold text-slate-600 hover:text-navy-900">AI</a>
+                <a href="#" class="text-sm font-semibold text-slate-600 hover:text-navy-900">Digital Life</a>
+                <a href="#" class="text-sm font-semibold text-slate-600 hover:text-navy-900">Global</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="flex items-center space-x-4">
+                <button
+                    class="hidden md:block px-5 py-2 bg-navy-900 text-white rounded-full text-xs font-bold uppercase tracking-wider hover:bg-slate-800 transition">Subscribe</button>
+                <button onclick="toggleMenu()" class="md:hidden p-1 text-navy-900">
+                    <i data-lucide="menu" class="w-7 h-7"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ================= MAIN APP CONTAINER ================= -->
+    <main id="app-root" class="min-h-screen">
+        <!-- Content injected via JS -->
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="bg-slate-50 border-t border-slate-200 mt-20 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div class="col-span-1 md:col-span-2">
+                    <h3 class="text-2xl font-bold text-navy-900 mb-4 tracking-tighter">The Brief</h3>
+                    <p class="text-slate-600 max-w-sm mb-6 leading-relaxed">
+                        We decode the complex world of technology and digital life into clear, human stories. No hype,
+                        no noise, just the signal.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-navy-900 mb-4 uppercase text-xs tracking-wider">Sections</h4>
+                    <ul class="space-y-3 text-slate-600 text-sm">
+                        <li><a href="#" class="hover:text-highlight-blue">Technology</a></li>
+                        <li><a href="#" class="hover:text-highlight-blue">Artificial Intelligence</a></li>
+                        <li><a href="#" class="hover:text-highlight-blue">Digital Life</a></li>
+                        <li><a href="#" class="hover:text-highlight-blue">Global Good</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-navy-900 mb-4 uppercase text-xs tracking-wider">Company</h4>
+                    <ul class="space-y-3 text-slate-600 text-sm">
+                        <li><a href="#" class="hover:text-highlight-blue">About Us</a></li>
+                        <li><a href="#" class="hover:text-highlight-blue">Ethics Policy</a></li>
+                        <li><a href="#" class="hover:text-highlight-blue">Privacy</a></li>
+                        <li><a href="#" class="hover:text-highlight-blue">Terms & Conditions</a></li>
+                        <li><a href="#" class="hover:text-highlight-blue">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center text-slate-400 text-sm pt-8 border-t border-slate-200 mt-12">
+                © 2026 The Brief Media Group. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- ================= JAVASCRIPT LOGIC ================= -->
+    <script>
+        // --- DATA STORE ---
+        const articles = [
+            {
+                id: 1,
+                title: "The Ocean Cleanup's New AI Milestone",
+                category: "Global Good",
+                readTime: "4 min read",
+                image: "https://images.unsplash.com/photo-1484291470158-b8f8d608850d?auto=format&fit=crop&q=80&w=1200",
+                summary: "A new autonomous system has successfully cleared 50 tons of plastic from the Pacific in a single week. Here is how the technology scales.",
+                content: {
+                    whatHappened: "The Ocean Cleanup project deployed 'System 03', a massive floating barrier powered by AI-driven navigation. In its first full-scale test week, it captured a record-breaking amount of debris from the Great Pacific Garbage Patch without disrupting marine life.",
+                    whyItMatters: "Plastic pollution is one of the most persistent environmental crises. Previous solutions were manual and slow. This success proves that autonomous, scalable technology can actually reverse damage, not just prevent it. It moves us from 'awareness' to 'action'.",
+                    inSimpleWords: "Ideally, we stop throwing plastic in the ocean. But for the plastic already there, this new big machine acts like a smart vacuum cleaner that knows where the trash is and scoops it up automatically, 24/7.",
+                    whatsNext: "The team plans to deploy ten more systems by 2026, aiming to cut the Garbage Patch size by 50% within five years. Regulatory approval is pending for coastal waters."
+                }
+            },
+            {
+                id: 2,
+                title: "Understanding 'Small Language Models'",
+                category: "Artificial Intelligence",
+                readTime: "3 min read",
+                image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=800",
+                summary: "Why big tech is suddenly thinking small. The shift from massive servers to AI that runs on your phone.",
+                content: {
+                    whatHappened: "After years of making AI models bigger, companies like Google and Apple are releasing 'Small Language Models' (SLMs). These are designed to run locally on your laptop or phone without needing the internet.",
+                    whyItMatters: "Privacy and speed. If the AI lives on your phone, your personal data doesn't have to be sent to a cloud server. It also uses significantly less energy, making it a greener alternative to massive data centers.",
+                    inSimpleWords: "Think of it like having a smart dictionary in your pocket instead of needing to call the library every time you have a question. It's faster and nobody hears what you asked.",
+                    whatsNext: "Expect the next iOS and Android updates to feature deeply integrated AI that works even when you are in Airplane Mode."
+                }
+            },
+            {
+                id: 3,
+                title: "Digital Minimalism in 2026",
+                category: "Digital Life",
+                readTime: "5 min read",
+                image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=800",
+                summary: "The dumbphone revolution is over. The new trend is 'Intentional Interfaces'.",
+                content: {
+                    whatHappened: "Software designers are moving away from 'engagement loops' (features designed to keep you addicted) toward 'calm computing'. New apps are launching with black-and-white modes and hidden notification centers by default.",
+                    whyItMatters: "Mental health data correlates high screen time with anxiety. This design shift puts user well-being above ad revenue, a sign that the tech industry is maturing.",
+                    inSimpleWords: "Apps are starting to be designed like tools (like a hammer) rather than toys (like a slot machine). They wait for you to use them; they don't pester you.",
+                    whatsNext: "Regulatory bodies in the EU are considering mandating 'calm mode' settings for all social media applications."
+                }
+            },
+            {
+                id: 4,
+                title: "Vertical Farming Hits Mainstream",
+                category: "Technology",
+                readTime: "4 min read",
+                image: "https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&q=80&w=800",
+                summary: "Grocery stores in urban centers are beginning to grow produce on their own rooftops using hydroponics.",
+                content: {
+                    whatHappened: "A major retail chain has announced that 30% of their leafy greens will be grown on-site using vertical hydroponic towers starting next month.",
+                    whyItMatters: "This eliminates thousands of miles of trucking (carbon emissions) and keeps food fresher for longer, reducing waste.",
+                    inSimpleWords: "Your salad is growing on the roof of the store where you buy it, not on a farm three states away.",
+                    whatsNext: "Look for '0-Mile' stickers on produce in the coming year."
+                }
+            }
+        ];
+
+        // --- RENDER FUNCTIONS ---
+
+        function renderHome() {
+            window.scrollTo(0, 0);
+            const hero = articles[0];
+            const others = articles.slice(1);
+
+            const html = `
+                <div class="fade-in">
+                    <!-- Hero Section -->
+                    <section class="container mx-auto px-4 py-8 md:py-12">
+                        <div onclick="renderArticle(${hero.id})" class="grid grid-cols-1 lg:grid-cols-12 gap-8 cursor-pointer group">
+                            <div class="lg:col-span-8 relative overflow-hidden rounded-xl">
+                                <img src="${hero.image}" alt="${hero.title}" class="w-full h-[300px] md:h-[500px] object-cover transition-transform duration-700 group-hover:scale-105">
+                                <div class="absolute top-4 left-4">
+                                    <span class="px-3 py-1 bg-slate-100/90 backdrop-blur text-navy-900 text-xs font-bold uppercase tracking-wider rounded-md border border-slate-200">${hero.category}</span>
+                                </div>
+                            </div>
+                            <div class="lg:col-span-4 flex flex-col justify-center">
+                                <div class="flex items-center space-x-2 text-slate-500 text-xs font-semibold mb-3 uppercase tracking-wider">
+                                    <i data-lucide="clock" class="w-3 h-3"></i>
+                                    <span>${hero.readTime}</span>
+                                </div>
+                                <h2 class="text-3xl md:text-4xl font-bold text-navy-900 mb-4 leading-tight group-hover:text-highlight-blue transition-colors">
+                                    ${hero.title}
+                                </h2>
+                                <p class="text-lg text-slate-600 leading-relaxed mb-6">
+                                    ${hero.summary}
+                                </p>
+                                <div class="flex items-center text-highlight-blue font-bold text-sm group-hover:translate-x-2 transition-transform">
+                                    READ EXPLAINER <i data-lucide="arrow-right" class="ml-2 w-4 h-4"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <div class="h-px bg-slate-100 container mx-auto mb-12"></div>
+
+                    <!-- Layout: Latest + Sidebar -->
+                    <section class="container mx-auto px-4 mb-20">
+                        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                            
+                            <!-- Left: Latest Stories -->
+                            <div class="lg:col-span-8">
+                                <div class="flex items-center space-x-4 mb-8">
+                                    <h2 class="text-xl font-bold text-navy-900 tracking-tight">Latest Briefs</h2>
+                                    <div class="h-px bg-slate-200 flex-grow"></div>
+                                </div>
+                                <div class="space-y-10">
+                                    ${others.map(article => `
+                                        <div onclick="renderArticle(${article.id})" class="flex flex-col md:flex-row gap-6 cursor-pointer group items-start">
+                                            <div class="w-full md:w-1/3 aspect-video overflow-hidden rounded-lg bg-slate-100">
+                                                <img src="${article.image}" alt="${article.title}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                                            </div>
+                                            <div class="w-full md:w-2/3">
+                                                <div class="mb-2">
+                                                    <span class="text-xs font-bold text-slate-500 uppercase tracking-wide">${article.category}</span>
+                                                </div>
+                                                <h3 class="text-xl font-bold text-navy-900 mb-2 group-hover:text-highlight-blue transition-colors">
+                                                    ${article.title}
+                                                </h3>
+                                                <p class="text-slate-600 leading-relaxed mb-3 line-clamp-2 text-sm">
+                                                    ${article.summary}
+                                                </p>
+                                                <span class="text-xs text-slate-400 font-medium">${article.readTime}</span>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+
+                            <!-- Right: Why This Matters (Sidebar) -->
+                            <div class="lg:col-span-4">
+                                <div class="bg-slate-50 rounded-xl p-6 border border-slate-100 sticky top-24">
+                                    <h3 class="text-lg font-bold text-navy-900 mb-6 flex items-center">
+                                        <span class="w-1 h-6 bg-navy-900 rounded-full mr-3"></span>
+                                        Why This Matters
+                                    </h3>
+                                    
+                                    <div class="space-y-4">
+                                        <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-100 hover:shadow-md transition">
+                                            <div class="text-highlight-blue mb-2"><i data-lucide="wifi" class="w-5 h-5"></i></div>
+                                            <h4 class="font-bold text-navy-900 mb-1 text-sm">Digital Rights</h4>
+                                            <p class="text-xs text-slate-600 leading-relaxed">New regulations are changing how companies can track you. It means more privacy, but less free content.</p>
+                                        </div>
+
+                                        <div class="bg-white p-4 rounded-lg shadow-sm border border-slate-100 hover:shadow-md transition">
+                                            <div class="text-highlight-blue mb-2"><i data-lucide="cpu" class="w-5 h-5"></i></div>
+                                            <h4 class="font-bold text-navy-900 mb-1 text-sm">Compute Power</h4>
+                                            <p class="text-xs text-slate-600 leading-relaxed">Chips are getting smaller, not just faster. This enables AI to run offline on your device.</p>
+                                        </div>
+                                    </div>
+
+                                    <button class="w-full mt-6 py-3 border border-slate-300 rounded-lg text-slate-600 text-sm font-bold hover:bg-white hover:text-navy-900 transition-colors">
+                                        View All Explainers
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+                </div>
+            `;
+
+            document.getElementById('app-root').innerHTML = html;
+            lucide.createIcons();
+        }
+
+        function renderArticle(id) {
+            window.scrollTo(0, 0);
+            const article = articles.find(a => a.id === id);
+
+            if (!article) return;
+
+            const html = `
+                <article class="fade-in bg-white">
+                    <!-- Article Header -->
+                    <div class="bg-slate-50 py-12 border-b border-slate-200">
+                        <div class="container mx-auto px-4 max-w-3xl text-center">
+                            <div class="flex justify-center mb-6">
+                                <span class="px-3 py-1 bg-highlight-blue/10 text-highlight-blue border border-highlight-blue/20 rounded-md text-xs font-bold uppercase tracking-wider">${article.category}</span>
+                            </div>
+                            <h1 class="text-3xl md:text-5xl font-extrabold text-navy-900 mb-6 leading-tight tracking-tight">
+                                ${article.title}
+                            </h1>
+                            <div class="flex items-center justify-center space-x-3 text-slate-500 text-sm">
+                                <span class="font-bold text-navy-900">The Brief Editors</span>
+                                <span class="w-1 h-1 bg-slate-400 rounded-full"></span>
+                                <span>${article.readTime}</span>
+                                <span class="w-1 h-1 bg-slate-400 rounded-full"></span>
+                                <span>Jan 22, 2026</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Main Content -->
+                    <div class="container mx-auto px-4 max-w-3xl py-12">
+                        
+                        <img src="${article.image}" alt="${article.title}" class="w-full h-[300px] md:h-[400px] object-cover rounded-xl mb-12 shadow-sm border border-slate-100">
+
+                        <div class="prose prose-lg max-w-none">
+                            
+                            <!-- Section: What Happened -->
+                            <div class="mb-12">
+                                <h3 class="text-xl font-bold text-navy-900 mb-4 flex items-center">
+                                    <span class="w-8 h-px bg-slate-300 mr-3"></span>
+                                    What Happened
+                                </h3>
+                                <p>${article.content.whatHappened}</p>
+                            </div>
+
+                            <!-- Section: Why It Matters (Highlighted) -->
+                            <div class="mb-12 bg-blue-50/50 p-8 rounded-xl border-l-4 border-navy-900">
+                                <h3 class="text-xl font-bold text-navy-900 mb-4">
+                                    Why It Matters
+                                </h3>
+                                <p class="text-slate-800 font-medium">${article.content.whyItMatters}</p>
+                            </div>
+
+                            <!-- Section: In Simple Words -->
+                            <div class="mb-12">
+                                <h3 class="text-xl font-bold text-navy-900 mb-4 flex items-center">
+                                    <span class="w-8 h-px bg-slate-300 mr-3"></span>
+                                    In Simple Words
+                                </h3>
+                                <p class="text-slate-700 italic border-l-2 border-slate-200 pl-4">${article.content.inSimpleWords}</p>
+                            </div>
+
+                            <!-- Section: What's Next -->
+                            <div class="mb-12">
+                                <h3 class="text-xl font-bold text-navy-900 mb-4 flex items-center">
+                                    <span class="w-8 h-px bg-slate-300 mr-3"></span>
+                                    What's Next
+                                </h3>
+                                <p>${article.content.whatsNext}</p>
+                            </div>
+
+                        </div>
+
+                        <div class="mt-16 pt-8 border-t border-slate-200 flex justify-between items-center">
+                            <button onclick="renderHome()" class="text-slate-500 hover:text-navy-900 font-bold flex items-center transition-colors">
+                                <i data-lucide="chevron-left" class="mr-1 w-5 h-5"></i> Back to Home
+                            </button>
+                            <div class="flex space-x-4">
+                                <button class="p-2 text-slate-400 hover:text-highlight-blue transition-colors"><i data-lucide="share-2" class="w-5 h-5"></i></button>
+                                <button class="p-2 text-slate-400 hover:text-highlight-blue transition-colors"><i data-lucide="bookmark" class="w-5 h-5"></i></button>
+                            </div>
+                        </div>
+
+                    </div>
+                </article>
+            `;
+
+            document.getElementById('app-root').innerHTML = html;
+            lucide.createIcons();
+        }
+
+        // --- MENU LOGIC ---
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const isOpen = menu.classList.contains('translate-x-0');
+
+            if (isOpen) {
+                menu.classList.remove('translate-x-0');
+                menu.classList.add('translate-x-full');
+                document.body.style.overflow = 'auto';
+            } else {
+                menu.classList.remove('translate-x-full');
+                menu.classList.add('translate-x-0');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        // --- INIT ---
+        window.onload = function () {
+            renderHome();
+        };
+
+    </script>
+</body>
+
+</html>
