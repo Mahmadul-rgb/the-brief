@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Utilix - Professional Web & SEO Utility Tools for analysis, validation, and optimization.">
+    <title>Utilix | Professional Web & SEO Utility Tools</title>
+    <style>
+        /* =========================================
+           CORE VARIABLES & RESET
+           ========================================= */
+        :root {
+            /* Palette - Strictly Professional */
+            --bg-white: #ffffff;
+            --bg-gray: #f8f9fa;
+            --text-primary: #111827; /* Near black */
+            --text-secondary: #4b5563; /* Dark gray */
+            --border-color: #e5e7eb; /* Subtle separator */
+            --accent-blue: #0066cc; /* Professional Link Blue */
+            --accent-hover: #004c99;
+            
+            /* Typography */
+            --font-main: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            --font-size-base: 16px;
+            
+            /* Spacing */
+            --container-max: 1200px;
+            --header-height: 64px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-white);
+            color: var(--text-primary);
+            line-height: 1.5;
+            font-size: var(--font-size-base);
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: color 0.2s ease;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* =========================================
+           TYPOGRAPHY
+           ========================================= */
+        h1, h2, h3 {
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            color: var(--text-primary);
+        }
+
+        h1 { font-size: 2.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.75rem; margin-bottom: 1rem; }
+        h3 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+        
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Utility Classes */
+        .container {
+            width: 100%;
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 24px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 4px; /* Slight roundness for modern feel */
+            cursor: pointer;
+            text-align: center;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-blue);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border-color: var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--text-primary);
+        }
+
+        /* =========================================
+           HEADER & NAVIGATION
+           ========================================= */
+        header {
+            height: var(--header-height);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            background-color: var(--bg-white);
+            z-index: 1000;
+        }
+
+        .header-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            color: var(--text-primary);
+            text-transform: capitalize;
+        }
+
+        .nav-desktop {
+            display: none; /* Hidden on mobile by default */
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-blue);
+        }
+
+        .header-actions {
+            display: none; /* Hidden on mobile by default */
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-toggle {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 24px;
+            height: 16px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .mobile-toggle span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background-color: var(--text-primary);
+        }
+
+        /* Mobile Dropdown */
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: var(--header-height);
+            left: 0;
+            width: 100%;
+            background-color: var(--bg-white);
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+        }
+
+        /* =========================================
+           HERO SECTION
+           ========================================= */
+        .hero {
+            padding: 80px 0 60px;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .hero-content {
+            max-width: 760px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            color: var(--text-primary);
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+        }
+
+        /* =========================================
+           DASHBOARD / TOOLS GRID
+           ========================================= */
+        .tools-section {
+            padding: 60px 0;
+            background-color: var(--bg-gray); /* Subtle separation */
+        }
+
+        .section-header {
+            margin-bottom: 40px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        /* Card Component */
+        .tool-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border-color);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            transition: border-color 0.2s ease;
+        }
+
+        .tool-card:hover {
+            border-color: var(--accent-blue);
+        }
+
+        .tool-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-weight: 700;
+            color: var(--accent-blue);
+            margin-bottom: 12px;
+        }
+
+        .tool-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .tool-link {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--accent-blue);
+            border-bottom: 1px solid transparent;
+        }
+
+        .tool-link:hover {
+            border-color: var(--accent-blue);
+        }
+
+        /* =========================================
+           FOOTER
+           ========================================= */
+        footer {
+            background-color: var(--bg-white);
+            border-top: 1px solid var(--border-color);
+            padding: 60px 0;
+            font-size: 0.9rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-secondary);
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--accent-blue);
+        }
+
+        .copyright {
+            text-align: left;
+            color: #9ca3af;
+            font-size: 0.85rem;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* =========================================
+           MEDIA QUERIES (DESKTOP)
+           ========================================= */
+        @media (min-width: 768px) {
+            /* Header */
+            .mobile-toggle { display: none; }
+            
+            .nav-desktop {
+                display: block;
+            }
+
+            .header-actions {
+                display: block;
+            }
+
+            /* Typography */
+            h1 { font-size: 3.5rem; }
+            
+            /* Grid */
+            .tools-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .footer-grid {
+                grid-template-columns: 2fr 1fr 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-inner">
+            <a href="#" class="logo">Utilix</a>
+
+            <nav class="nav-desktop">
+    <ul class="nav-links">
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#docs">Documentation</a></li>
+        <li><a href="#about">About</a></li>
+    </ul>
+            </nav>
+
+            <div class="header-actions">
+    <a href="#tools" class="btn btn-primary">Access Tools</a>
+            </div>
+
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <div class="mobile-menu" id="mobileMenu">
+            <ul class="nav-links" style="flex-direction: column; gap: 16px;">
+    <li><a href="#tools">Tools</a></li>
+    <li><a href="#docs">Documentation</a></li>
+    <li><a href="#about">About</a></li>
+            </ul>
+            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+    <a href="#tools" class="btn btn-primary" style="text-align: center;">Access Tools</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container hero-content">
+                <h1>Professional Web & SEO Utility Tools</h1>
+                <p>
+                    A comprehensive suite for the analysis, validation, and optimization of technical web architecture. 
+                    Utilix provides structured data evaluation and performance metrics for development teams and SEO professionals.
+                </p>
+                <div>
+    <a href="#tools" class="btn btn-primary">Explore Utilities</a>
+    <a href="#docs" class="btn btn-outline" style="margin-left: 10px;">Technical Documentation</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="tools" class="tools-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Technical Utilities</h2>
+                    <p style="margin-bottom: 0;">Select a module to begin validation.</p>
+                </div>
+
+                <div class="tools-grid">
+                    <div class="tool-card">
+                        <span class="tool-tag">Validation</span>
+                        <h3>Schema Markup Generator</h3>
+                       <p class="tool-desc">
+Generate and validate structured JSON-LD markup to ensure compliance with search engine and schema.org standards.
+</p>
+                        <a href="#" class="tool-link">Open Utility →</a>
+                    </div>
+
+                    <div class="tool-card">
+                        <span class="tool-tag">Analysis</span>
+                        <h3>HTTP Header Inspector</h3>
+                       <p class="tool-desc">
+Inspect HTTP response headers, status codes, and redirect behavior for technical diagnostics and auditing.
+</p>
+                        <a href="#" class="tool-link">Open Utility →</a>
+                    </div>
+
+                    <div class="tool-card">
+                        <span class="tool-tag">Optimization</span>
+                        <h3>Robots.txt Validator</h3>
+                     <p class="tool-desc">
+Evaluate robots.txt directives across multiple user-agents to ensure correct crawl and indexing behavior.
+</p>
+                        <a href="#" class="tool-link">Open Utility →</a>
+                    </div>
+
+                    <div class="tool-card">
+                        <span class="tool-tag">Security</span>
+                        <h3>SSL/TLS Certificate Check</h3>
+                        <p class="tool-desc">
+Analyze SSL/TLS certificate configuration, validity periods, and trust chains for secure deployment verification.
+</p>
+                        <a href="#" class="tool-link">Open Utility →</a>
+                    </div>
+
+                    <div class="tool-card">
+                        <span class="tool-tag">Performance</span>
+                        <h3>Minification Engine</h3>
+                      <p class="tool-desc">
+Optimize HTML, CSS, and JavaScript assets by reducing payload size while preserving functional integrity.
+</p>
+                        <a href="#" class="tool-link">Open Utility →</a>
+                    </div>
+
+                    <div class="tool-card">
+                        <span class="tool-tag">Utility</span>
+                        <h3>Meta Tag Analyzer</h3>
+                        <p class="tool-desc">
+Extract and evaluate on-page meta information to assess SEO readiness and social sharing compatibility.
+</p>
+                        <a href="#" class="tool-link">Open Utility →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="#" class="logo" style="margin-bottom: 20px; display: block;">Utilix</a>
+                    <p style="font-size: 0.9rem; max-width: 300px;">
+                        Professional grade web utilities for the modern internet. Built for scale, accuracy, and reliability.
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="#">All Tools</a></li>
+                        <li><a href="#">Status</a></li>
+                        <li><a href="#">Changelog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Data Processing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Sales</a></li>
+                        <li><a href="#">Twitter</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2024 Utilix Platform. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple logic for mobile menu toggle
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggle = document.getElementById('mobileToggle');
+            const menu = document.getElementById('mobileMenu');
+
+            toggle.addEventListener('click', () => {
+                menu.classList.toggle('active');
+            });
+
+            // Close menu when resizing to desktop to reset state
+            window.addEventListener('resize', () => {
+                if (window.innerWidth >= 768) {
+                    menu.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
