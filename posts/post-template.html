@@ -56,13 +56,26 @@
             </nav>
 
             <!-- Actions -->
-            <div class="flex items-center space-x-4">
-                <button
-                    class="hidden md:block px-5 py-2 bg-navy-900 text-white rounded-full text-xs font-bold uppercase tracking-wider hover:bg-slate-800 transition">Subscribe</button>
-                
-            </div>
-        </div>
+           <div class="flex items-center space-x-4">
+    <button
+        class="hidden md:block px-5 py-2 bg-navy-900 text-white rounded-full text-xs font-bold uppercase tracking-wider hover:bg-slate-800 transition">
+        Subscribe
+    </button>
+
+    <!-- Mobile menu button -->
+    <button onclick="toggleMenu()" class="md:hidden p-1 text-navy-900">
+        <i data-lucide="menu" class="w-7 h-7"></i>
+    </button>
+</div>
     </header>
+   <div id="mobile-menu" class="fixed inset-0 z-50 bg-white transform translate-x-full flex flex-col h-full w-full">
+        <div class="p-6 flex-grow flex flex-col">
+            <div class="flex justify-between items-center mb-12">
+                <span class="text-xl font-extrabold tracking-tighter">The Brief.</span>
+                <button onclick="toggleMenu()" class="p-2 bg-slate-100 rounded-full hover:bg-slate-200 transition">
+                    <i data-lucide="x" class="w-6 h-6 text-navy-900"></i>
+                </button>
+            </div>
 
 
 <!-- ARTICLE CONTENT WILL GO HERE -->
@@ -174,6 +187,26 @@
             </div>
         </div>
     </footer>
+          <script src="https://unpkg.com/lucide@latest"></script>
+
+<script>
+function toggleMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const isOpen = menu.classList.contains('translate-x-0');
+
+    if (isOpen) {
+        menu.classList.remove('translate-x-0');
+        menu.classList.add('translate-x-full');
+        document.body.style.overflow = 'auto';
+    } else {
+        menu.classList.remove('translate-x-full');
+        menu.classList.add('translate-x-0');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+lucide.createIcons();
+</script>
 
 </body>
 </html>
