@@ -1,224 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>ARTICLE TITLE | The Brief</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Clear stories for a digital world. No hype, no noise — just the signal.">
+  <meta charset="UTF-8">
+  <title>ARTICLE TITLE | The Brief</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
 
-<style>
-:root{
-  --text:#0f172a;
-  --muted:#64748b;
-  --border:#e5e7eb;
-  --soft:#f8fafc;
-  --accent:#2563eb;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:Inter,system-ui,-apple-system,sans-serif;
-  color:var(--text);
-  background:#ffffff;
-}
-a{text-decoration:none;color:var(--accent)}
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 
-.container{
-  max-width:720px;
-  margin:auto;
-  padding:16px;
-}
-
-/* HEADER */
-header{
-  border-bottom:1px solid var(--border);
-}
-.nav{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:14px 16px;
-}
-.brand{
-  font-weight:700;
-  font-size:18px;
-}
-.tagline{
-  font-size:11px;
-  color:var(--muted);
-  margin-top:2px;
-}
-.subscribe{
-  border:1px solid var(--border);
-  padding:6px 12px;
-  border-radius:20px;
-  font-size:12px;
-  font-weight:500;
-}
-
-/* HERO IMAGE */
-.hero img{
-  width:100%;
-  border-radius:10px;
-  margin:18px 0;
-}
-
-/* ARTICLE META */
-.category{
-  font-size:12px;
-  color:#2563eb;
-  font-weight:600;
-  letter-spacing:.04em;
-}
-h1{
-  font-size:26px;
-  line-height:1.25;
-  margin:6px 0 8px;
-}
-.meta{
-  font-size:12px;
-  color:var(--muted);
-}
-
-/* SECTIONS */
-.section{
-  margin-top:28px;
-}
-.section h2{
-  font-size:15px;
-  font-weight:600;
-  margin-bottom:8px;
-}
-.section p{
-  font-size:15px;
-  line-height:1.65;
-  color:#334155;
-}
-
-/* WHY IT MATTERS BOX */
-.why{
-  background:var(--soft);
-  border-left:4px solid #c7d2fe;
-  padding:14px 16px;
-  border-radius:6px;
-}
-
-/* SIMPLE WORDS */
-.simple{
-  font-style:italic;
-  color:#475569;
-}
-
-/* FOOTER LINK */
-.back{
-  margin:32px 0;
-  font-size:14px;
-}
-
-/* FOOTER */
-footer{
-  border-top:1px solid var(--border);
-  padding:28px 16px;
-  margin-top:40px;
-}
-.footer-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:24px;
-}
-.footer-title{
-  font-weight:600;
-  margin-bottom:8px;
-}
-footer p, footer a{
-  font-size:13px;
-  color:#475569;
-  display:block;
-  margin-bottom:6px;
-}
-.copy{
-  text-align:center;
-  font-size:12px;
-  color:var(--muted);
-  margin-top:24px;
-}
-</style>
+  <style>
+    body { font-family: Inter, sans-serif; }
+  </style>
 </head>
 
-<body>
+<body class="bg-white text-slate-900">
+      <!-- ================= HEADER ================= -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-slate-100">
+        <div class="container mx-auto px-4 h-16 flex items-center justify-between">
+            <!-- Logo -->
+            <div onclick="renderHome()" class="cursor-pointer group">
+                <h1
+                    class="text-2xl font-extrabold tracking-tighter leading-none group-hover:text-highlight-blue transition-colors">
+                    The Brief</h1>
+                <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest hidden sm:block">Clear
+                    stories for a digital world</span>
+            </div>
 
-<header>
-  <div class="nav">
-    <div>
-      <div class="brand">The Brief</div>
-      <div class="tagline">CLEAR STORIES FOR A DIGITAL WORLD</div>
-    </div>
-    <div class="subscribe">SUBSCRIBE</div>
-  </div>
-</header>
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#" class="text-sm font-semibold text-slate-600 hover:text-navy-900">Technology</a>
+                <a href="#" class="text-sm font-semibold text-slate-600 hover:text-navy-900">AI</a>
+                <a href="#" class="text-sm font-semibold text-slate-600 hover:text-navy-900">Digital Life</a>
+                <a href="#" class="text-sm font-semibold text-slate-600 hover:text-navy-900">Global</a>
+            </nav>
 
-<main class="container">
+            <!-- Actions -->
+            <div class="flex items-center space-x-4">
+                <button
+                    class="hidden md:block px-5 py-2 bg-navy-900 text-white rounded-full text-xs font-bold uppercase tracking-wider hover:bg-slate-800 transition">Subscribe</button>
+                <button onclick="toggleMenu()" class="md:hidden p-1 text-navy-900">
+                    <i data-lucide="menu" class="w-7 h-7"></i>
+                </button>
+            </div>
+        </div>
+    </header>
 
-  <div class="hero">
-    <img src="hero.jpg" alt="Article image">
-  </div>
 
-  <div class="category">CATEGORY NAME</div>
-  <h1>ARTICLE TITLE</h1>
-  <div class="meta">The Brief Editors · 4 min read · Jan 22, 2026</div>
+<!-- ARTICLE CONTENT WILL GO HERE -->
 
-  <div class="section">
-    <h2>What Happened</h2>
-    <p>TEXT HERE</p>
-  </div>
 
-  <div class="section why">
-    <h2>Why It Matters</h2>
-    <p>TEXT HERE</p>
-  </div>
-
-  <div class="section simple">
-    <h2>In Simple Words</h2>
-    <p>TEXT HERE</p>
-  </div>
-
-  <div class="section">
-    <h2>What’s Next</h2>
-    <p>TEXT HERE</p>
-  </div>
-
-  <div class="back">
-    ← <a href="/">Back to Home</a>
-  </div>
-
-</main>
-
-<footer>
-  <div class="container footer-grid">
-    <div>
-      <div class="footer-title">The Brief</div>
-      <p>We decode the complex world of technology and digital life into clear, human stories. No hype, no noise — just the signal.</p>
-    </div>
-    <div>
-      <div class="footer-title">Sections</div>
-      <a href="#">Technology</a>
-      <a href="#">Artificial Intelligence</a>
-      <a href="#">Digital Life</a>
-      <a href="#">Global Good</a>
-    </div>
-    <div>
-      <div class="footer-title">Company</div>
-      <a href="#">About Us</a>
-      <a href="#">Ethics Policy</a>
-      <a href="#">Privacy</a>
-      <a href="#">Terms & Conditions</a>
-      <a href="#">Contact</a>
-    </div>
-  </div>
-  <div class="copy">© 2026 The Brief Media Group. All rights reserved.</div>
-</footer>
+<!-- FOOTER WILL GO HERE -->
 
 </body>
 </html>
