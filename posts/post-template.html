@@ -87,7 +87,7 @@
     <div id="mobile-menu" class="fixed inset-0 z-50 bg-white transform translate-x-full flex flex-col h-full w-full">
         <div class="p-6 flex-grow flex flex-col">
             <div class="flex justify-between items-center mb-12">
-                <span class="text-xl font-extrabold tracking-tighter">The Brief.</span>
+                <span class="text-xl font-extrabold tracking-tighter">The Brief</span>
                 <button onclick="toggleMenu()" class="p-2 bg-slate-100 rounded-full hover:bg-slate-200 transition">
                     <i data-lucide="x" class="w-6 h-6 text-navy-900"></i>
                 </button>
@@ -148,7 +148,22 @@
         </div>
     </header>
     <script>
-  lucide.createIcons();
+function toggleMenu() {
+  const menu = document.getElementById('mobile-menu');
+  const isOpen = menu.classList.contains('translate-x-0');
+
+  if (isOpen) {
+    menu.classList.remove('translate-x-0');
+    menu.classList.add('translate-x-full');
+    document.body.style.overflow = 'auto';
+  } else {
+    menu.classList.remove('translate-x-full');
+    menu.classList.add('translate-x-0');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+lucide.createIcons();
 </script>
 </body>
 
