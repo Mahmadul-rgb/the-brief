@@ -98,7 +98,7 @@
             </div>
 
             <nav class="flex flex-col space-y-6">
-                <a href="#" onclick="renderHome(); toggleMenu()" class="text-3xl font-bold text-navy-900">Home</a>
+                <a href="index.html" class="text-3xl font-bold text-navy-900"> Home </a>
                 <a href="#" class="text-2xl font-medium text-slate-500 hover:text-navy-900 flex items-center gap-3">
                     <i data-lucide="cpu" class="w-6 h-6"></i> Technology
                 </a>
@@ -125,13 +125,13 @@
     <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-slate-100">
         <div class="container mx-auto px-4 h-16 flex items-center justify-between">
             <!-- Logo -->
-            <div onclick="renderHome()" class="cursor-pointer group">
+            <a href="index.html" class="cursor-pointer group block">
                 <h1
                     class="text-2xl font-extrabold tracking-tighter leading-none group-hover:text-highlight-blue transition-colors">
                     The Brief</h1>
                 <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest hidden sm:block">Clear
                     stories for a digital world</span>
-            </div>
+            </a>
 
             <!-- Desktop Nav -->
             <nav class="hidden md:flex items-center space-x-8">
@@ -336,14 +336,14 @@
             }
         }
 
-        // --- INIT ---
-        window.onload = function () {
-            renderHome();
-        };
-
+     
     </script>
+    <script>
+  lucide.createIcons();
+</script>
 </body>
 
 
 </html>
+
 
