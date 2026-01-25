@@ -235,12 +235,35 @@
 
       </div>
 
-      <!-- Back link -->
-      <div class="mt-16 pt-8 border-t border-slate-200">
-        <a href="../index.html" class="text-highlight-blue font-bold">
-          ← Back to Home
-        </a>
-      </div>
+    <!-- Article Actions -->
+<div class="mt-16 pt-8 border-t border-slate-200 flex items-center justify-between">
+
+  <!-- Back -->
+  <a href="../index.html"
+     class="text-slate-500 hover:text-navy-900 font-bold flex items-center transition-colors">
+    ← Back to Home
+  </a>
+
+  <!-- Actions -->
+  <div class="flex space-x-4">
+
+    <!-- Share -->
+    <button
+      onclick="navigator.share ? navigator.share({ title: document.title, url: window.location.href }) : alert('Copy link from address bar')"
+      class="p-2 text-slate-400 hover:text-highlight-blue transition-colors"
+      aria-label="Share article">
+      <i data-lucide="share-2" class="w-5 h-5"></i>
+    </button>
+
+    <!-- Save (UI only) -->
+    <button
+      class="p-2 text-slate-400 hover:text-highlight-blue transition-colors"
+      aria-label="Save article">
+      <i data-lucide="bookmark" class="w-5 h-5"></i>
+    </button>
+
+  </div>
+</div>
 
     </div>
 
