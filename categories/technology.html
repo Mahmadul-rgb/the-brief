@@ -286,41 +286,39 @@
         </div>
     </footer>
 
-    <!-- ================= JAVASCRIPT LOGIC ================= -->
-    <script>
-    function toggleMenu() {
-        const sidebar = document.getElementById("mobile-menu-sidebar");
-        const overlay = document.getElementById("mobile-menu-overlay");
-        const body = document.body;
-        
-        const isClosed = sidebar.classList.contains("-translate-x-full");
+<script>
+        function toggleMenu() {
+            const sidebar = document.getElementById("mobile-menu-sidebar");
+            const overlay = document.getElementById("mobile-menu-overlay");
+            const body = document.body;
 
-        if (isClosed) {
-            // Open Menu
-            overlay.classList.remove("hidden");
-            body.style.overflow = "hidden"; // Prevent scrolling the background
-            
-            // Small delay to ensure the browser sees the "hidden" removal before animating
-            requestAnimationFrame(() => {
-                overlay.classList.remove("opacity-0");
-                sidebar.classList.remove("-translate-x-full");
-            });
-        } else {
-            // Close Menu
-            overlay.classList.add("opacity-0");
-            sidebar.classList.add("-translate-x-full");
-            body.style.overflow = "auto"; // Restore scrolling
+            const isClosed = sidebar.classList.contains("-translate-x-full");
 
-            // Wait 400ms for animation to finish before hiding the element
-            setTimeout(() => {
-                overlay.classList.add("hidden");
-            }, 400);
+            if (isClosed) {
+                // Open Menu
+                overlay.classList.remove("hidden");
+                body.style.overflow = "hidden"; // Prevent scrolling the background
+
+                // Small delay to ensure the browser sees the "hidden" removal before animating
+                requestAnimationFrame(() => {
+                    overlay.classList.remove("opacity-0");
+                    sidebar.classList.remove("-translate-x-full");
+                });
+            } else {
+                // Close Menu
+                overlay.classList.add("opacity-0");
+                sidebar.classList.add("-translate-x-full");
+                body.style.overflow = "auto"; // Restore scrolling
+
+                // Wait 400ms for animation to finish before hiding the element
+                setTimeout(() => {
+                    overlay.classList.add("hidden");
+                }, 400);
+            }
         }
-    }
-</script>
-    <script>
-  lucide.createIcons();
-</script>
+    
+        lucide.createIcons();
+    </script>
 </body>
 
 
