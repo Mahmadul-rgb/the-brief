@@ -83,37 +83,62 @@
 </head>
 <body class="bg-white text-navy-900 overflow-x-hidden">
 <!-- ================= MOBILE MENU OVERLAY ================= -->
-    <div id="mobile-menu" class="fixed inset-0 z-50 bg-white transform translate-x-full flex flex-col h-full w-full">
-        <div class="p-6 flex-grow flex flex-col">
-            <div class="flex justify-between items-center mb-12">
-                <span class="text-xl font-extrabold tracking-tighter">The Brief</span>
-                <button onclick="toggleMenu()" class="p-2 bg-slate-100 rounded-full hover:bg-slate-200 transition">
-                    <i data-lucide="x" class="w-6 h-6 text-navy-900"></i>
-                </button>
-            </div>
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-navy-950/60 backdrop-blur-md z-40 hidden opacity-0"
+        onclick="toggleMenu()">
+    </div>
+    <div id="mobile-menu-sidebar"
+        class="fixed top-0 left-0 bottom-0 w-[85%] max-w-[320px] bg-white z-50 transform -translate-x-full flex flex-col shadow-2xl border-r border-slate-200">
 
-            <nav class="flex flex-col space-y-6">
-                <a href="../index.html" class="text-3xl font-bold text-navy-900">Home</a>
-                <a href="../categories/technology.html" class="text-2xl font-medium text-slate-500 hover:text-navy-900 flex items-center gap-3">
-                    <i data-lucide="cpu" class="w-6 h-6"></i> Technology
-                </a>
-                <a href="../categories/artificial-intelligence.html" class="text-2xl font-medium text-slate-500 hover:text-navy-900 flex items-center gap-3">
-                    <i data-lucide="smartphone" class="w-6 h-6"></i> Artificial Intelligence
-                </a>
-                <a href="../categories/digital-life.html" class="text-2xl font-medium text-slate-500 hover:text-navy-900 flex items-center gap-3">
-                    <i data-lucide="wifi" class="w-6 h-6"></i> Digital Life
-                </a>
-                <a href="../categories/global-good.html" class="text-2xl font-medium text-slate-500 hover:text-navy-900 flex items-center gap-3">
-                    <i data-lucide="globe" class="w-6 h-6"></i> Global Good
-                </a>
-            </nav>
-
-            <div class="mt-auto border-t border-slate-100 pt-6">
-                <button class="w-full py-4 bg-navy-900 text-white rounded-lg font-bold text-lg mb-4">Subscribe to
-                    Newsletter</button>
-                <p class="text-slate-400 text-sm">© 2026 The Brief Media</p>
-            </div>
+        <!-- HEADER -->
+        <div class="p-5 flex items-center justify-between border-b border-slate-100">
+            <span class="text-navy-900 font-bold text-lg">The Brief</span>
+            <button onclick="toggleMenu()"
+                class="text-slate-400 hover:text-navy-900 hover:bg-slate-100 p-2 rounded-full transition">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
         </div>
+
+        <!-- Links (Your original styling works perfectly on white) -->
+        <nav class="flex flex-col gap-3 p-5 overflow-y-auto">
+            <a href="https://mahmadul-rgb.github.io/the-brief/categories/technology.html"
+                class="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl text-slate-600 hover:bg-slate-100 transition">
+                <i data-lucide="cpu" class="w-5 h-5"></i>
+                <span class="font-semibold">Technology</span>
+            </a>
+
+            <a href="https://mahmadul-rgb.github.io/the-brief/categories/artificial-intelligence.html"
+                class="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl text-slate-600 hover:bg-slate-100 transition">
+                <i data-lucide="smartphone" class="w-5 h-5"></i>
+                <span class="font-semibold">Artificial Intelligence</span>
+            </a>
+
+            <a href="https://mahmadul-rgb.github.io/the-brief/categories/digital-life.html"
+                class="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl text-slate-600 hover:bg-slate-100 transition">
+                <i data-lucide="wifi" class="w-5 h-5"></i>
+                <span class="font-semibold">Digital Life</span>
+            </a>
+
+            <a href="https://mahmadul-rgb.github.io/the-brief/categories/global-good.html"
+                class="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl text-slate-600 hover:bg-slate-100 transition">
+                <i data-lucide="globe" class="w-5 h-5"></i>
+                <span class="font-semibold">Global Good</span>
+            </a>
+
+            <div class="h-px bg-slate-100 my-4"></div>
+
+            <div class="flex flex-col items-center">
+                <a
+  href="https://forms.gle/xpYqJpXoFvz7b7rZ7"
+  target="_blank"
+  rel="noopener"
+  class="w-full py-4 bg-[#1a1f2e] text-white rounded-2xl font-bold text-sm tracking-wide hover:bg-navy-800 transition text-center block">
+  Subscribe to Newsletter
+</a>
+                <p class="text-slate-400 text-[11px] mt-4 font-medium">
+                    © 2026 The Brief Media
+                </p>
+            </div>
+        </nav>
     </div>
 
     <!-- ================= HEADER ================= -->
