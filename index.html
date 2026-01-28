@@ -346,28 +346,19 @@
     </footer>
 
     <!-- ================= JAVASCRIPT LOGIC ================= -->
-    <script>
-      
-       
-      
-        // --- MENU LOGIC ---
-        function toggleMenu() {
-            const menu = document.getElementById('mobile-menu');
-            const isOpen = menu.classList.contains('translate-x-0');
+<script>
+function toggleMenu() {
+  const menu = document.getElementById("mobile-menu");
 
-            if (isOpen) {
-                menu.classList.remove('translate-x-0');
-                menu.classList.add('translate-x-full');
-                document.body.style.overflow = 'auto';
-            } else {
-                menu.classList.remove('translate-x-full');
-                menu.classList.add('translate-x-0');
-                document.body.style.overflow = 'hidden';
-            }
-        }
-
-     
-    </script>
+  if (menu.classList.contains("hidden")) {
+    menu.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+  } else {
+    menu.classList.add("hidden");
+    document.body.style.overflow = "auto";
+  }
+}
+</script>
     <script>
   lucide.createIcons();
 </script>
@@ -375,6 +366,7 @@
 
 
 </html>
+
 
 
 
