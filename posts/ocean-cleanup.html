@@ -92,9 +92,11 @@
 </head>
 <body class="bg-white text-navy-900 overflow-x-hidden">
 <!-- ================= MOBILE MENU OVERLAY ================= -->
-    <div id="mobile-menu-overlay" class="fixed inset-0 bg-navy-950/60 backdrop-blur-md z-40 hidden opacity-0"
-        onclick="toggleMenu()">
-    </div>
+    <div
+  id="mobile-menu-overlay"
+  class="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 hidden opacity-0"
+  onclick="toggleMenu()">
+</div>
     <div id="mobile-menu-sidebar"
         class="fixed top-0 left-0 bottom-0 w-[85%] max-w-[320px] bg-white z-50 transform -translate-x-full flex flex-col shadow-2xl border-r border-slate-200">
 
@@ -412,8 +414,6 @@
                 }, 400);
             }
         }
-    </script>
-    <script>
         lucide.createIcons();
     </script>
 </body>
