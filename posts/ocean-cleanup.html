@@ -79,6 +79,15 @@
             color: #334155;
             /* slate-700 */
         }
+        /* Smooth Menu Transitions */
+    #mobile-menu-sidebar {
+        transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+        will-change: transform;
+    }
+    #mobile-menu-overlay {
+        transition: opacity 0.4s ease-in-out;
+        will-change: opacity;
+    }
     </style>
 </head>
 <body class="bg-white text-navy-900 overflow-x-hidden">
