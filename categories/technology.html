@@ -81,20 +81,37 @@
             color: #334155;
             /* slate-700 */
         }
+        /* Smooth Menu Transitions */
+    #mobile-menu-sidebar {
+        transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+        will-change: transform;
+    }
+    #mobile-menu-overlay {
+        transition: opacity 0.4s ease-in-out;
+        will-change: opacity;
+    }
     </style>
 </head>
 
 <body class="bg-white text-navy-900 overflow-x-hidden">
 
     <!-- ================= MOBILE MENU OVERLAY ================= -->
-    <div id="mobile-menu" class="fixed inset-0 z-50 bg-white transform translate-x-full flex flex-col h-full w-full">
-        <div class="p-6 flex-grow flex flex-col">
-            <div class="flex justify-between items-center mb-12">
-                <span class="text-xl font-extrabold tracking-tighter">The Brief.</span>
-                <button onclick="toggleMenu()" class="p-2 bg-slate-100 rounded-full hover:bg-slate-200 transition">
-                    <i data-lucide="x" class="w-6 h-6 text-navy-900"></i>
-                </button>
-            </div>
+    <div id="mobile-menu-overlay" 
+     class="fixed inset-0 bg-navy-950/60 backdrop-blur-md z-40 hidden opacity-0"
+     onclick="toggleMenu()">
+</div>
+
+<!-- 2. The Sidebar Drawer -->
+<div id="mobile-menu-sidebar" 
+     class="fixed top-0 left-0 bottom-0 w-[85%] max-w-[320px] bg-navy-900 z-50 transform -translate-x-full flex flex-col shadow-2xl border-r border-white/5">
+    
+    <!-- HEADER -->
+    <div class="p-5 flex items-center justify-between border-b border-white/5">
+        <span class="text-white font-bold text-lg">The Brief.</span>
+        <button onclick="toggleMenu()" class="text-slate-400 hover:text-white">
+            <i data-lucide="x" class="w-6 h-6"></i>
+        </button>
+    </div>
 
             <nav class="flex flex-col space-y-6">
                 <a href="../index.html" class="text-3xl font-bold text-navy-900"> Home </a>
@@ -277,27 +294,36 @@
 
     <!-- ================= JAVASCRIPT LOGIC ================= -->
     <script>
-      
-       
-      
-        // --- MENU LOGIC ---
-        function toggleMenu() {
-            const menu = document.getElementById('mobile-menu');
-            const isOpen = menu.classList.contains('translate-x-0');
+    function toggleMenu() {
+        const sidebar = document.getElementById("mobile-menu-sidebar");
+        const overlay = document.getElementById("mobile-menu-overlay");
+        const body = document.body;
+        
+        const isClosed = sidebar.classList.contains("-translate-x-full");
 
-            if (isOpen) {
-                menu.classList.remove('translate-x-0');
-                menu.classList.add('translate-x-full');
-                document.body.style.overflow = 'auto';
-            } else {
-                menu.classList.remove('translate-x-full');
-                menu.classList.add('translate-x-0');
-                document.body.style.overflow = 'hidden';
-            }
+        if (isClosed) {
+            // Open Menu
+            overlay.classList.remove("hidden");
+            body.style.overflow = "hidden"; // Prevent scrolling the background
+            
+            // Small delay to ensure the browser sees the "hidden" removal before animating
+            requestAnimationFrame(() => {
+                overlay.classList.remove("opacity-0");
+                sidebar.classList.remove("-translate-x-full");
+            });
+        } else {
+            // Close Menu
+            overlay.classList.add("opacity-0");
+            sidebar.classList.add("-translate-x-full");
+            body.style.overflow = "auto"; // Restore scrolling
+
+            // Wait 400ms for animation to finish before hiding the element
+            setTimeout(() => {
+                overlay.classList.add("hidden");
+            }, 400);
         }
-
-     
-    </script>
+    }
+</script>
     <script>
   lucide.createIcons();
 </script>
