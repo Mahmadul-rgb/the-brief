@@ -180,15 +180,27 @@
             </nav>
 
             <!-- Actions -->
-            <div class="flex items-center space-x-4">
-                <a
-  href="https://forms.gle/xpYqJpXoFvz7b7rZ7"
-  target="_blank"
-  rel="noopener"
-  class="hidden md:block px-5 py-2 bg-navy-900 text-white rounded-full text-xs font-bold uppercase tracking-wider hover:bg-slate-800 transition text-center">
-  Subscribe
-</a>
-            </div>
+            <!-- Actions -->
+<div class="flex items-center space-x-4">
+
+    <!-- Mobile hamburger -->
+    <button
+        onclick="toggleMenu()"
+        class="md:hidden p-2 text-navy-900"
+        aria-label="Open menu">
+        <i data-lucide="menu" class="w-7 h-7"></i>
+    </button>
+
+    <!-- Desktop Subscribe -->
+    <a
+        href="https://forms.gle/xpYqJpXoFvz7b7rZ7"
+        target="_blank"
+        rel="noopener"
+        class="hidden md:block px-5 py-2 bg-navy-900 text-white rounded-full text-xs font-bold uppercase tracking-wider hover:bg-slate-800 transition">
+        Subscribe
+    </a>
+
+</div>
         </div>
     </header>
 
@@ -393,6 +405,7 @@
 
 
 </html>
+
 
 
 
