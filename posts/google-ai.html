@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -7,12 +9,12 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Google Fonts: Inter for that clean tech look -->
+    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800&display=swap" rel="stylesheet">
 
-    <!-- Lucide Icons (Script to render them) -->
+    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <script>
@@ -24,11 +26,11 @@
                     },
                     colors: {
                         navy: {
-                            900: '#0f172a', // Deep slate navy
+                            900: '#0f172a',
                             800: '#1e293b',
                         },
                         highlight: {
-                            blue: '#2563eb', // Standard tech blue
+                            blue: '#2563eb',
                         }
                     }
                 }
@@ -37,26 +39,23 @@
     </script>
 
     <style>
-        /* Custom Utilities */
         body {
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
 
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
+        /* Mobile Menu Animations */
+        #mobile-menu-sidebar {
+            transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1);
+            will-change: transform;
         }
 
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+        #mobile-menu-overlay {
+            transition: opacity 0.4s ease-in-out;
+            will-change: opacity;
         }
 
-        /* Mobile Menu Transitions */
-        #mobile-menu {
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
+        /* Fade In Animation */
         .fade-in {
             animation: fadeIn 0.4s ease-out forwards;
         }
@@ -73,72 +72,73 @@
             }
         }
 
-        /* Typography tweaks for readability */
         .prose p {
             margin-bottom: 1.5em;
             line-height: 1.75;
             color: #334155;
-            /* slate-700 */
         }
-        /* Smooth Menu Transitions */
-    #mobile-menu-sidebar {
-        transition: transform 0.4s cubic-bezier(0.33, 1, 0.68, 1);
-        will-change: transform;
-    }
-    #mobile-menu-overlay {
-        transition: opacity 0.4s ease-in-out;
-        will-change: opacity;
-    }
     </style>
 </head>
-<body class="bg-white text-navy-900 overflow-x-hidden">
-<!-- ================= MOBILE MENU OVERLAY ================= -->
-    <!-- 1. The Backdrop Overlay -->
-<div id="mobile-menu-overlay" 
-     class="fixed inset-0 bg-navy-950/60 backdrop-blur-md z-40 hidden opacity-0"
-     onclick="toggleMenu()">
-</div>
 
-<!-- 2. The Sidebar Drawer -->
-<div id="mobile-menu-sidebar" 
-     class="fixed top-0 left-0 bottom-0 w-[85%] max-w-[320px] bg-navy-900 z-50 transform -translate-x-full flex flex-col shadow-2xl border-r border-white/5">
-    
-    <!-- HEADER -->
-    <div class="p-5 flex items-center justify-between border-b border-white/5">
-        <span class="text-white font-bold text-lg">The Brief.</span>
-        <button onclick="toggleMenu()" class="text-slate-400 hover:text-white">
-            <i data-lucide="x" class="w-6 h-6"></i>
-        </button>
+<body class="bg-white text-navy-900 overflow-x-hidden">
+
+    <!-- ================= MOBILE MENU (Standardized to Light Theme) ================= -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 hidden opacity-0"
+        onclick="toggleMenu()">
     </div>
 
-            <nav class="flex flex-col space-y-6">
-                <a href="../index.html" class="text-3xl font-bold text-navy-900">Home</a>
-                <a href="../categories/technology.html" class="text-2xl font-medium text-slate-500 hover:text-navy-900 flex items-center gap-3">
-                    <i data-lucide="cpu" class="w-6 h-6"></i> Technology
-                </a>
-                <a href="../categories/artificial-intelligence.html" class="text-2xl font-medium text-slate-500 hover:text-navy-900 flex items-center gap-3">
-                    <i data-lucide="smartphone" class="w-6 h-6"></i> Artificial Intelligence
-                </a>
-                <a href="../categories/digital-life.html" class="text-2xl font-medium text-slate-500 hover:text-navy-900 flex items-center gap-3">
-                    <i data-lucide="wifi" class="w-6 h-6"></i> Digital Life
-                </a>
-                <a href="../categories/global-good.html" class="text-2xl font-medium text-slate-500 hover:text-navy-900 flex items-center gap-3">
-                    <i data-lucide="globe" class="w-6 h-6"></i> Global Good
-                </a>
-            </nav>
+    <div id="mobile-menu-sidebar"
+        class="fixed top-0 left-0 bottom-0 w-[85%] max-w-[320px] bg-white z-50 transform -translate-x-full flex flex-col shadow-2xl border-r border-slate-200">
 
-            <div class="mt-auto border-t border-slate-100 pt-6">
-                <button class="w-full py-4 bg-navy-900 text-white rounded-lg font-bold text-lg mb-4">Subscribe to
-                    Newsletter</button>
-                <p class="text-slate-400 text-sm">© 2026 The Brief Media</p>
-            </div>
+        <!-- Header -->
+        <div class="p-5 flex items-center justify-between border-b border-slate-100">
+            <span class="text-navy-900 font-bold text-lg">The Brief</span>
+            <button onclick="toggleMenu()"
+                class="text-slate-400 hover:text-navy-900 hover:bg-slate-100 p-2 rounded-full transition">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
         </div>
+
+        <!-- Links (Relative Paths) -->
+        <nav class="flex flex-col gap-3 p-5 overflow-y-auto h-full">
+            <a href="../categories/technology.html"
+                class="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl text-slate-600 hover:bg-slate-100 transition">
+                <i data-lucide="cpu" class="w-5 h-5"></i>
+                <span class="font-semibold">Technology</span>
+            </a>
+            <a href="../categories/artificial-intelligence.html"
+                class="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl text-slate-600 hover:bg-slate-100 transition">
+                <i data-lucide="smartphone" class="w-5 h-5"></i>
+                <span class="font-semibold">Artificial Intelligence</span>
+            </a>
+            <a href="../categories/digital-life.html"
+                class="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl text-slate-600 hover:bg-slate-100 transition">
+                <i data-lucide="wifi" class="w-5 h-5"></i>
+                <span class="font-semibold">Digital Life</span>
+            </a>
+            <a href="../categories/global-good.html"
+                class="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl text-slate-600 hover:bg-slate-100 transition">
+                <i data-lucide="globe" class="w-5 h-5"></i>
+                <span class="font-semibold">Global Good</span>
+            </a>
+
+            <div class="h-px bg-slate-100 my-4"></div>
+
+            <div class="mt-auto">
+                <a href="https://forms.gle/xpYqJpXoFvz7b7rZ7" target="_blank" rel="noopener"
+                    class="w-full py-4 bg-[#1a1f2e] text-white rounded-2xl font-bold text-sm tracking-wide hover:bg-navy-800 transition text-center block">
+                    Subscribe to Newsletter
+                </a>
+                <p class="text-slate-400 text-[11px] mt-4 font-medium text-center">
+                    © 2026 The Brief Media
+                </p>
+            </div>
+        </nav>
     </div>
 
     <!-- ================= HEADER ================= -->
     <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-slate-100">
         <div class="container mx-auto px-4 h-16 flex items-center justify-between">
-            <!-- Logo -->
             <a href="../index.html" class="cursor-pointer group block">
                 <h1
                     class="text-2xl font-extrabold tracking-tighter leading-none group-hover:text-highlight-blue transition-colors">
@@ -147,15 +147,17 @@
                     stories for a digital world</span>
             </a>
 
-            <!-- Desktop Nav -->
             <nav class="hidden md:flex items-center space-x-8">
-                <a href="../categories/technology.html" class="text-sm font-semibold text-slate-600 hover:text-navy-900">Technology</a>
-                <a href="../categories/artificial-intelligence.html" class="text-sm font-semibold text-slate-600 hover:text-navy-900">AI</a>
-                <a href="../categories/digital-life.html" class="text-sm font-semibold text-slate-600 hover:text-navy-900">Digital Life</a>
-                <a href="../categories/global-good.html" class="text-sm font-semibold text-slate-600 hover:text-navy-900">Global</a>
+                <a href="../categories/technology.html"
+                    class="text-sm font-semibold text-slate-600 hover:text-navy-900">Technology</a>
+                <a href="../categories/artificial-intelligence.html"
+                    class="text-sm font-semibold text-slate-600 hover:text-navy-900">AI</a>
+                <a href="../categories/digital-life.html"
+                    class="text-sm font-semibold text-slate-600 hover:text-navy-900">Digital Life</a>
+                <a href="../categories/global-good.html"
+                    class="text-sm font-semibold text-slate-600 hover:text-navy-900">Global</a>
             </nav>
 
-            <!-- Actions -->
             <div class="flex items-center space-x-4">
                 <button
                     class="hidden md:block px-5 py-2 bg-navy-900 text-white rounded-full text-xs font-bold uppercase tracking-wider hover:bg-slate-800 transition">Subscribe</button>
@@ -165,229 +167,160 @@
             </div>
         </div>
     </header>
+
     <main class="fade-in">
+        <!-- ================= ARTICLE ================= -->
+        <article class="bg-white">
+            <div class="bg-slate-50 py-12 border-b border-slate-200">
+                <div class="container mx-auto px-4 max-w-3xl text-center">
+                    <div class="flex justify-center mb-6">
+                        <span
+                            class="px-3 py-1 bg-highlight-blue/10 text-highlight-blue border border-highlight-blue/20 rounded-md text-xs font-bold uppercase tracking-wider">
+                            Technology
+                        </span>
+                    </div>
+                    <h1 class="text-3xl md:text-5xl font-extrabold text-navy-900 mb-6 leading-tight tracking-tight">
+                        Google’s New AI Search Is Changing How Search Results Work
+                    </h1>
+                    <div class="flex items-center justify-center space-x-3 text-slate-500 text-sm">
+                        <span class="font-bold text-navy-900">The Brief Editors</span>
+                        <span class="w-1 h-1 bg-slate-400 rounded-full"></span>
+                        <span>4 min read</span>
+                        <span class="w-1 h-1 bg-slate-400 rounded-full"></span>
+                        <span>Jan 22, 2026</span>
+                    </div>
+                </div>
+            </div>
 
-  <!-- ================= ARTICLE ================= -->
-  <article class="bg-white">
+            <div class="container mx-auto px-4 max-w-3xl py-12">
+                <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1600&q=80"
+                    alt="Abstract visualization of AI-powered search and data"
+                    class="w-full h-[300px] md:h-[400px] object-cover rounded-xl mb-12 shadow-sm border border-slate-100">
 
-    <!-- Article Header -->
-    <div class="bg-slate-50 py-12 border-b border-slate-200">
-      <div class="container mx-auto px-4 max-w-3xl text-center">
+                <div class="prose prose-lg max-w-none">
+                    <div class="mb-12">
+                        <h3 class="text-xl font-bold text-navy-900 mb-4">What Happened</h3>
+                        <p>Google has started rolling out an AI-powered search experience that places AI-generated
+                            answers at the top of search results. Instead of only listing links, the system combines
+                            information from multiple sources and presents a summarized response. This update is part of
+                            Google’s broader effort to integrate generative AI into its products.</p>
+                    </div>
 
-        <!-- Category -->
-        <div class="flex justify-center mb-6">
-          <span class="px-3 py-1 bg-highlight-blue/10 text-highlight-blue border border-highlight-blue/20 rounded-md text-xs font-bold uppercase tracking-wider">
-            Technology
-          </span>
-        </div>
+                    <div class="mb-12 bg-blue-50/50 p-8 rounded-xl border-l-4 border-navy-900">
+                        <h3 class="text-xl font-bold text-navy-900 mb-4">Why It Matters</h3>
+                        <p>Search traffic has long been a key way for websites to reach readers. When AI-generated
+                            answers appear first, fewer users may click through to individual sources. This could affect
+                            how news sites, blogs, and independent creators attract audiences. At the same time, users
+                            can get quicker answers without visiting multiple pages.</p>
+                    </div>
 
-        <!-- Title -->
-        <h1 class="text-3xl md:text-5xl font-extrabold text-navy-900 mb-6 leading-tight tracking-tight">
-          Google’s New AI Search Is Changing How Search Results Work
-        </h1>
+                    <div class="mb-12">
+                        <h3 class="text-xl font-bold text-navy-900 mb-4">Context</h3>
+                        <p>For decades, search engines focused on ranking links based on relevance. The rapid
+                            development of large language models has accelerated a shift toward direct answers. Google’s
+                            changes reflect growing competition from AI tools that provide information without sending
+                            users to external sites. This represents one of the most significant shifts in search
+                            behavior since the rise of mobile search.</p>
+                    </div>
 
-        <!-- Meta -->
-        <div class="flex items-center justify-center space-x-3 text-slate-500 text-sm">
-          <span class="font-bold text-navy-900">The Brief Editors</span>
-          <span class="w-1 h-1 bg-slate-400 rounded-full"></span>
-          <span>4 min read</span>
-          <span class="w-1 h-1 bg-slate-400 rounded-full"></span>
-          <span>Jan 22, 2026</span>
-        </div>
+                    <div class="mb-12">
+                        <h3 class="text-xl font-bold text-navy-900 mb-4">In Simple Words</h3>
+                        <p class="italic border-l-2 border-slate-200 pl-4">Previously, Google mainly directed users to
+                            other websites. Now, it often explains the information directly on the search page. This can
+                            save time for users, but it also changes how online content is discovered and rewarded.</p>
+                    </div>
 
-      </div>
-    </div>
+                    <div class="mb-12">
+                        <h3 class="text-xl font-bold text-navy-900 mb-4">What’s Next</h3>
+                        <p>Google plans to expand AI search to more regions and subject areas, including shopping,
+                            health, and local information. Website owners may need to adjust by offering deeper
+                            analysis, original reporting, or content that cannot be easily summarized by AI.</p>
+                    </div>
+                </div>
 
-    <!-- Main Content -->
-    <div class="container mx-auto px-4 max-w-3xl py-12">
+                <div class="mt-16 pt-8 border-t border-slate-200 flex items-center justify-between">
+                    <a href="../index.html"
+                        class="text-slate-500 hover:text-navy-900 font-bold flex items-center transition-colors">
+                        < Back to Home </a>
+                            <div class="flex space-x-4">
+                                <button
+                                    onclick="navigator.share ? navigator.share({ title: document.title, url: window.location.href }) : alert('Copy link from address bar')"
+                                    class="p-2 text-slate-400 hover:text-highlight-blue transition-colors">
+                                    <i data-lucide="share-2" class="w-5 h-5"></i>
+                                </button>
+                                <button class="p-2 text-slate-400 hover:text-highlight-blue transition-colors">
+                                    <i data-lucide="bookmark" class="w-5 h-5"></i>
+                                </button>
+                            </div>
+                </div>
+            </div>
+        </article>
+    </main>
 
-      <!-- HERO IMAGE (optional) -->
-      <!-- If no image, delete this entire img tag -->
-        <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=1600&q=80"
-  alt="Abstract visualization of AI-powered search and data"
-  class="w-full h-[300px] md:h-[400px] object-cover rounded-xl mb-12 shadow-sm border border-slate-100">
-      
-
-      <!-- Article Text -->
-      <div class="prose prose-lg max-w-none">
-
-        <!-- What Happened -->
-        <div class="mb-12">
-          <h3 class="text-xl font-bold text-navy-900 mb-4">
-            What Happened
-          </h3>
-          <p>
-            Google has started rolling out an AI-powered search experience that places AI-generated answers at the top of search results.
-            Instead of only listing links, the system combines information from multiple sources and presents a summarized response.
-            This update is part of Google’s broader effort to integrate generative AI into its products.
-          </p>
-        </div>
-
-        <!-- Why It Matters -->
-        <div class="mb-12 bg-blue-50/50 p-8 rounded-xl border-l-4 border-navy-900">
-          <h3 class="text-xl font-bold text-navy-900 mb-4">
-            Why It Matters
-          </h3>
-          <p>
-            Search traffic has long been a key way for websites to reach readers. When AI-generated answers appear first, fewer users may click through to individual sources.
-            This could affect how news sites, blogs, and independent creators attract audiences.
-            At the same time, users can get quicker answers without visiting multiple pages.
-          </p>
-        </div>
-        <!-- Context -->
-<div class="mb-12">
-  <h3 class="text-xl font-bold text-navy-900 mb-4">
-    Context
-  </h3>
-  <p>
-    For decades, search engines focused on ranking links based on relevance.
-    The rapid development of large language models has accelerated a shift
-    toward direct answers. Google’s changes reflect growing competition
-    from AI tools that provide information without sending users to external
-    sites. This represents one of the most significant shifts in search
-    behavior since the rise of mobile search.
-  </p>
-</div>
-
-        <!-- In Simple Words -->
-        <div class="mb-12">
-          <h3 class="text-xl font-bold text-navy-900 mb-4">
-            In Simple Words
-          </h3>
-          <p class="italic border-l-2 border-slate-200 pl-4">
-            Previously, Google mainly directed users to other websites.
-Now, it often explains the information directly on the search page.
-This can save time for users, but it also changes how online content is discovered and rewarded.
-          </p>
-        </div>
-
-        <!-- What’s Next -->
-        <div class="mb-12">
-          <h3 class="text-xl font-bold text-navy-900 mb-4">
-            What’s Next
-          </h3>
-          <p>
-            Google plans to expand AI search to more regions and subject areas, including shopping, health, and local information.
-            Website owners may need to adjust by offering deeper analysis, original reporting, or content that cannot be easily summarized by AI.
-          </p>
-        </div>
-
-      </div>
-
-    <!-- Article Actions -->
-<div class="mt-16 pt-8 border-t border-slate-200 flex items-center justify-between">
-
-  <!-- Back -->
-  <a href="../index.html"
-     class="text-slate-500 hover:text-navy-900 font-bold flex items-center transition-colors">
-    < Back to Home
-  </a>
-
-  <!-- Actions -->
-  <div class="flex space-x-4">
-
-    <!-- Share -->
-    <button
-      onclick="navigator.share ? navigator.share({ title: document.title, url: window.location.href }) : alert('Copy link from address bar')"
-      class="p-2 text-slate-400 hover:text-highlight-blue transition-colors"
-      aria-label="Share article">
-      <i data-lucide="share-2" class="w-5 h-5"></i>
-    </button>
-
-    <!-- Save (UI only) -->
-    <button
-      class="p-2 text-slate-400 hover:text-highlight-blue transition-colors"
-      aria-label="Save article">
-      <i data-lucide="bookmark" class="w-5 h-5"></i>
-    </button>
-
-  </div>
-</div>
-
-    </div>
-
-  </article>
-
-</main>
     <!-- ================= FOOTER ================= -->
-<footer class="bg-slate-50 border-t border-slate-200 mt-20 py-12">
-  <div class="container mx-auto px-4">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+    <footer class="bg-slate-50 border-t border-slate-200 mt-20 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div class="col-span-1 md:col-span-2">
+                    <h3 class="text-2xl font-bold text-navy-900 mb-4 tracking-tighter">The Brief</h3>
+                    <p class="text-slate-600 max-w-sm mb-6 leading-relaxed">We decode the complex world of technology
+                        and digital life into clear, human stories. No hype, no noise, just the signal.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-navy-900 mb-4 uppercase text-xs tracking-wider">Sections</h4>
+                    <ul class="space-y-3 text-slate-600 text-sm">
+                        <li><a href="../categories/technology.html" class="hover:text-highlight-blue">Technology</a>
+                        </li>
+                        <li><a href="../categories/artificial-intelligence.html"
+                                class="hover:text-highlight-blue">Artificial Intelligence</a></li>
+                        <li><a href="../categories/digital-life.html" class="hover:text-highlight-blue">Digital Life</a>
+                        </li>
+                        <li><a href="../categories/global-good.html" class="hover:text-highlight-blue">Global Good</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-navy-900 mb-4 uppercase text-xs tracking-wider">Company</h4>
+                    <ul class="space-y-3 text-slate-600 text-sm">
+                        <li><a href="#" class="hover:text-highlight-blue">About Us</a></li>
+                        <li><a href="#" class="hover:text-highlight-blue">Ethics Policy</a></li>
+                        <li><a href="#" class="hover:text-highlight-blue">Privacy</a></li>
+                        <li><a href="#" class="hover:text-highlight-blue">Terms</a></li>
+                        <li><a href="#" class="hover:text-highlight-blue">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center text-slate-400 text-sm pt-8 border-t border-slate-200 mt-12">
+                © 2026 The Brief Media Group. All rights reserved.
+            </div>
+        </div>
+    </footer>
 
-      <div class="col-span-1 md:col-span-2">
-        <h3 class="text-2xl font-bold text-navy-900 mb-4 tracking-tighter">
-          The Brief
-        </h3>
-        <p class="text-slate-600 max-w-sm mb-6 leading-relaxed">
-          We decode the complex world of technology and digital life into clear,
-          human stories. No hype, no noise, just the signal.
-        </p>
-      </div>
-
-      <div>
-        <h4 class="font-bold text-navy-900 mb-4 uppercase text-xs tracking-wider">
-          Sections
-        </h4>
-        <ul class="space-y-3 text-slate-600 text-sm">
-          <li><a href="../categories/technology.html" class="hover:text-highlight-blue">Technology</a></li>
-          <li><a href="../categories/artificial-intelligence.html" class="hover:text-highlight-blue">Artificial Intelligence</a></li>
-          <li><a href="../categories/digital-life.html" class="hover:text-highlight-blue">Digital Life</a></li>
-          <li><a href="../categories/global-good.html" class="hover:text-highlight-blue">Global Good</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h4 class="font-bold text-navy-900 mb-4 uppercase text-xs tracking-wider">
-          Company
-        </h4>
-        <ul class="space-y-3 text-slate-600 text-sm">
-          <li><a href="#" class="hover:text-highlight-blue">About Us</a></li>
-          <li><a href="#" class="hover:text-highlight-blue">Ethics Policy</a></li>
-          <li><a href="#" class="hover:text-highlight-blue">Privacy</a></li>
-          <li><a href="#" class="hover:text-highlight-blue">Terms & Conditions</a></li>
-          <li><a href="#" class="hover:text-highlight-blue">Contact</a></li>
-        </ul>
-      </div>
-
-    </div>
-
-    <div class="text-center text-slate-400 text-sm pt-8 border-t border-slate-200 mt-12">
-      © 2026 The Brief Media Group. All rights reserved.
-    </div>
-  </div>
-</footer>
-   <script>
+    <script>
         function toggleMenu() {
             const sidebar = document.getElementById("mobile-menu-sidebar");
             const overlay = document.getElementById("mobile-menu-overlay");
             const body = document.body;
-
             const isClosed = sidebar.classList.contains("-translate-x-full");
 
             if (isClosed) {
-                // Open Menu
                 overlay.classList.remove("hidden");
-                body.style.overflow = "hidden"; // Prevent scrolling the background
-
-                // Small delay to ensure the browser sees the "hidden" removal before animating
+                body.style.overflow = "hidden";
                 requestAnimationFrame(() => {
                     overlay.classList.remove("opacity-0");
                     sidebar.classList.remove("-translate-x-full");
                 });
             } else {
-                // Close Menu
                 overlay.classList.add("opacity-0");
                 sidebar.classList.add("-translate-x-full");
-                body.style.overflow = "auto"; // Restore scrolling
-
-                // Wait 400ms for animation to finish before hiding the element
+                body.style.overflow = "auto";
                 setTimeout(() => {
                     overlay.classList.add("hidden");
                 }, 400);
             }
         }
-    </script>
-    <script>
         lucide.createIcons();
     </script>
 </body>
+
+</html>
