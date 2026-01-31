@@ -30,3 +30,9 @@ const POSTS = [
     url: "posts/ocean-cleanup.html",
   },
 ];
+// Always return newest posts first
+function getPostsSortedByDate() {
+  return [...POSTS].sort(
+    (a, b) => new Date(b.date) - new Date(a.date)
+  );
+}
