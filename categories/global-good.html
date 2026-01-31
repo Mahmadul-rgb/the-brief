@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Global Good | The Brief</title>
-    
+
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -26,6 +26,7 @@
                     },
                     colors: {
                         navy: {
+                            950: '#020617', // FIXED: Added 950 definition
                             900: '#0f172a', // Deep slate navy
                             800: '#1e293b',
                         },
@@ -64,6 +65,7 @@
                 opacity: 0;
                 transform: translateY(10px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -93,9 +95,9 @@
 <body class="bg-white text-navy-900 overflow-x-hidden">
 
     <!-- ================= MOBILE MENU OVERLAY ================= -->
-    <div id="mobile-menu-overlay" 
-         class="fixed inset-0 bg-navy-950/60 backdrop-blur-md z-40 hidden opacity-0"
-         onclick="toggleMenu()">
+    <!-- FIXED: bg-navy-950/60 will now work because 950 is defined in config -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-navy-950/60 backdrop-blur-md z-40 hidden opacity-0"
+        onclick="toggleMenu()">
     </div>
 
     <!-- ================= MOBILE MENU SIDEBAR ================= -->
@@ -113,6 +115,7 @@
 
         <!-- LINKS -->
         <nav class="flex flex-col gap-3 p-5 overflow-y-auto">
+
             <a href="../categories/technology.html"
                 class="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl text-slate-600 hover:bg-slate-100 transition">
                 <i data-lucide="cpu" class="w-5 h-5"></i>
@@ -131,10 +134,11 @@
                 <span class="font-semibold">Digital Life</span>
             </a>
 
+            <!-- ACTIVE PAGE: Global Good -->
             <a href="../categories/global-good.html"
-                class="flex items-center gap-4 p-4 bg-slate-50 rounded-2xl text-slate-600 hover:bg-slate-100 transition">
+                class="flex items-center gap-4 p-4 bg-slate-100 rounded-2xl text-navy-900 font-bold transition">
                 <i data-lucide="globe" class="w-5 h-5"></i>
-                <span class="font-semibold">Global Good</span>
+                <span>Global Good</span>
             </a>
 
             <div class="h-px bg-slate-100 my-4"></div>
@@ -156,7 +160,8 @@
         <div class="container mx-auto px-4 h-16 flex items-center justify-between">
             <!-- Logo -->
             <a href="../index.html" class="cursor-pointer group block">
-                <h1 class="text-2xl font-extrabold tracking-tighter leading-none group-hover:text-highlight-blue transition-colors">
+                <h1
+                    class="text-2xl font-extrabold tracking-tighter leading-none group-hover:text-highlight-blue transition-colors">
                     The Brief
                 </h1>
                 <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest hidden sm:block">
@@ -166,10 +171,14 @@
 
             <!-- Desktop Nav -->
             <nav class="hidden md:flex items-center space-x-8">
-                <a href="../categories/technology.html" class="text-sm font-semibold text-slate-600 hover:text-navy-900">Technology</a>
-                <a href="../categories/artificial-intelligence.html" class="text-sm font-semibold text-slate-600 hover:text-navy-900">AI</a>
-                <a href="../categories/digital-life.html" class="text-sm font-semibold text-slate-600 hover:text-navy-900">Digital Life</a>
-                <a href="../categories/global-good.html" class="text-sm font-semibold text-slate-600 hover:text-navy-900">Global</a>
+                <a href="../categories/technology.html"
+                    class="text-sm font-semibold text-slate-600 hover:text-navy-900">Technology</a>
+                <a href="../categories/artificial-intelligence.html"
+                    class="text-sm font-semibold text-slate-600 hover:text-navy-900">AI</a>
+                <a href="../categories/digital-life.html"
+                    class="text-sm font-semibold text-slate-600 hover:text-navy-900">Digital Life</a>
+                <!-- ACTIVE PAGE: Global Good -->
+                <a href="../categories/global-good.html" class="text-sm font-bold text-navy-900">Global</a>
             </nav>
 
             <!-- Actions -->
@@ -201,7 +210,7 @@
         </section>
 
         <div class="h-px bg-slate-100 container mx-auto mb-12"></div>
-        
+
         <!-- ================= LATEST BRIEFS ================= -->
         <section class="container mx-auto px-4 mb-20">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -230,7 +239,8 @@
                                     Global Good
                                 </span>
 
-                                <h3 class="text-xl font-bold text-navy-900 mt-1 mb-2 group-hover:text-highlight-blue transition-colors">
+                                <h3
+                                    class="text-xl font-bold text-navy-900 mt-1 mb-2 group-hover:text-highlight-blue transition-colors">
                                     The Ocean Cleanup’s New AI Milestone
                                 </h3>
 
@@ -314,17 +324,23 @@
             if (isClosed) {
                 // Open Menu
                 overlay.classList.remove("hidden");
-                body.style.overflow = "hidden"; // Prevent scrolling
 
-                requestAnimationFrame(() => {
+                // FIXED: Use classList for overflow to avoid overriding 'overflow-x-hidden'
+                body.classList.add("overflow-hidden");
+
+                // FIXED: Small timeout ensures the browser sees 'display:block' before fading opacity
+                setTimeout(() => {
                     overlay.classList.remove("opacity-0");
                     sidebar.classList.remove("-translate-x-full");
-                });
+                }, 10);
+
             } else {
                 // Close Menu
                 overlay.classList.add("opacity-0");
                 sidebar.classList.add("-translate-x-full");
-                body.style.overflow = "auto"; // Restore scrolling
+
+                // FIXED: Restore scrolling by removing the class
+                body.classList.remove("overflow-hidden");
 
                 setTimeout(() => {
                     overlay.classList.add("hidden");
